@@ -547,3 +547,302 @@ type Label struct {
 	Type        string     `json:"type"`
 	GroupID     int64      `json:"group_id"`
 }
+
+// Owner contains project owner information
+type Owner struct {
+	Name  string `json:"name"`
+	Email string `json:"email"`
+}
+
+// ProjectCreatePayload contains project create payload of system hook
+type ProjectCreateSystemEventPayload struct {
+	ObjectKind        string     `json:"object_kind"`
+	ProjectID         int64      `json:"project_id"`
+	ProjectVisibility string     `json:"project_visibility"`
+	CreatedAt         customTime `json:"created_at"`
+	UpdatedAt         customTime `json:"updated_at"`
+	EventName         string     `json:"event_name"`
+	Name              string     `json:"name"`
+	OwnerEmail        string     `json:"owner_email"`
+	OwnerName         string     `json:"owner_name"`
+	Owners            []Owner    `json:"owners"`
+	Path              string     `json:"path"`
+	PathWithNamespace string     `json:"path_with_namespace"`
+}
+
+// ProjectDestroyPayload contains project destroy payload of system hook
+type ProjectDestroySystemEventPayload struct {
+	ObjectKind        string     `json:"object_kind"`
+	ProjectID         int64      `json:"project_id"`
+	ProjectVisibility string     `json:"project_visibility"`
+	CreatedAt         customTime `json:"created_at"`
+	UpdatedAt         customTime `json:"updated_at"`
+	EventName         string     `json:"event_name"`
+	Name              string     `json:"name"`
+	OwnerEmail        string     `json:"owner_email"`
+	OwnerName         string     `json:"owner_name"`
+	Owners            []Owner    `json:"owners"`
+	Path              string     `json:"path"`
+	PathWithNamespace string     `json:"path_with_namespace"`
+}
+
+// ProjectRenamePayload contains project rename payload of system hook
+type ProjectRenameSystemEventPayload struct {
+	ObjectKind           string     `json:"object_kind"`
+	ProjectID            int64      `json:"project_id"`
+	ProjectVisibility    string     `json:"project_visibility"`
+	CreatedAt            customTime `json:"created_at"`
+	UpdatedAt            customTime `json:"updated_at"`
+	EventName            string     `json:"event_name"`
+	Name                 string     `json:"name"`
+	OwnerEmail           string     `json:"owner_email"`
+	OwnerName            string     `json:"owner_name"`
+	Owners               []Owner    `json:"owners"`
+	Path                 string     `json:"path"`
+	PathWithNamespace    string     `json:"path_with_namespace"`
+	OldPathWithNamespace string     `json:"old_path_with_namespace"`
+}
+
+// ProjectTransferSystemEventPayload contains project transfer payload of system hook
+type ProjectTransferSystemEventPayload struct {
+	ObjectKind           string     `json:"object_kind"`
+	ProjectID            int64      `json:"project_id"`
+	ProjectVisibility    string     `json:"project_visibility"`
+	CreatedAt            customTime `json:"created_at"`
+	UpdatedAt            customTime `json:"updated_at"`
+	EventName            string     `json:"event_name"`
+	Name                 string     `json:"name"`
+	OwnerEmail           string     `json:"owner_email"`
+	OwnerName            string     `json:"owner_name"`
+	Owners               []Owner    `json:"owners"`
+	Path                 string     `json:"path"`
+	PathWithNamespace    string     `json:"path_with_namespace"`
+	OldPathWithNamespace string     `json:"old_path_with_namespace"`
+}
+
+// ProjectUpdateSystemEventPayload contains project update payload of system hook
+type ProjectUpdateSystemEventPayload struct {
+	ObjectKind           string     `json:"object_kind"`
+	ProjectID            int64      `json:"project_id"`
+	ProjectVisibility    string     `json:"project_visibility"`
+	CreatedAt            customTime `json:"created_at"`
+	UpdatedAt            customTime `json:"updated_at"`
+	EventName            string     `json:"event_name"`
+	Name                 string     `json:"name"`
+	OwnerEmail           string     `json:"owner_email"`
+	OwnerName            string     `json:"owner_name"`
+	Owners               []Owner    `json:"owners"`
+	Path                 string     `json:"path"`
+	PathWithNamespace    string     `json:"path_with_namespace"`
+	OldPathWithNamespace string     `json:"old_path_with_namespace"`
+}
+
+// NewTeamMemberPayload contains new team member payload of system hook
+type NewTeamMemberSystemEventPayload struct {
+	ObjectKind        string     `json:"object_kind"`
+	CreatedAt         customTime `json:"created_at"`
+	UpdatedAt         customTime `json:"updated_at"`
+	EventName         string     `json:"event_name"`
+	AccessLevel       string     `json:"access_level"`
+	ProjectID         int64      `json:"project_id"`
+	ProjectName       string     `json:"project_name"`
+	ProjectPath       string     `json:"project_path"`
+	PathWithNamespace string     `json:"path_with_namespace"`
+	UserEmail         string     `json:"user_email"`
+	UserName          string     `json:"user_name"`
+	UserUsername      string     `json:"user_username"`
+	UserID            int64      `json:"user_id"`
+	ProjectVisibility string     `json:"project_visibility"`
+}
+
+// TeamMemberRemovedPayload contains team member removed payload of system hook
+type TeamMemberRemovedSystemEventPayload struct {
+	ObjectKind        string     `json:"object_kind"`
+	CreatedAt         customTime `json:"created_at"`
+	UpdatedAt         customTime `json:"updated_at"`
+	EventName         string     `json:"event_name"`
+	AccessLevel       string     `json:"access_level"`
+	ProjectID         int64      `json:"project_id"`
+	ProjectName       string     `json:"project_name"`
+	ProjectPath       string     `json:"project_path"`
+	PathWithNamespace string     `json:"path_with_namespace"`
+	UserEmail         string     `json:"user_email"`
+	UserName          string     `json:"user_name"`
+	UserUsername      string     `json:"user_username"`
+	UserID            int64      `json:"user_id"`
+	ProjectVisibility string     `json:"project_visibility"`
+}
+
+// TeamMemberUpdatedPayload contains team member updated payload of system hook
+type TeamMemberUpdatedSystemEventPayload struct {
+	ObjectKind        string     `json:"object_kind"`
+	CreatedAt         customTime `json:"created_at"`
+	UpdatedAt         customTime `json:"updated_at"`
+	EventName         string     `json:"event_name"`
+	AccessLevel       string     `json:"access_level"`
+	ProjectID         int64      `json:"project_id"`
+	ProjectName       string     `json:"project_name"`
+	ProjectPath       string     `json:"project_path"`
+	PathWithNamespace string     `json:"path_with_namespace"`
+	UserEmail         string     `json:"user_email"`
+	UserName          string     `json:"user_name"`
+	UserUsername      string     `json:"user_username"`
+	UserID            int64      `json:"user_id"`
+	ProjectVisibility string     `json:"project_visibility"`
+}
+
+// UserCreatedPayload contains user created payload of system hook
+type UserCreatedSystemEventPayload struct {
+	ObjectKind string     `json:"object_kind"`
+	CreatedAt  customTime `json:"created_at"`
+	UpdatedAt  customTime `json:"updated_at"`
+	EventName  string     `json:"event_name"`
+	Email      string     `json:"email"`
+	Name       string     `json:"name"`
+	Username   string     `json:"username"`
+	UserID     int64      `json:"user_id"`
+}
+
+// UserRemovedPayload contains user removed payload of system hook
+type UserRemovedSystemEventPayload struct {
+	ObjectKind string     `json:"object_kind"`
+	CreatedAt  customTime `json:"created_at"`
+	UpdatedAt  customTime `json:"updated_at"`
+	EventName  string     `json:"event_name"`
+	Email      string     `json:"email"`
+	Name       string     `json:"name"`
+	Username   string     `json:"username"`
+	UserID     int64      `json:"user_id"`
+}
+
+// UserFailedLoginPayload contains user failed login payload of system hook
+type UserFailedLoginSystemEventPayload struct {
+	ObjectKind string     `json:"object_kind"`
+	CreatedAt  customTime `json:"created_at"`
+	UpdatedAt  customTime `json:"updated_at"`
+	EventName  string     `json:"event_name"`
+	Name       string     `json:"name"`
+	Email      string     `json:"email"`
+	UserID     int64      `json:"user_id"`
+	Username   string     `json:"username"`
+	State      string     `json:"state"`
+}
+
+// UserRenamedPayload contains user rename payload of system hook
+type UserRenamedSystemEventPayload struct {
+	ObjectKind  string     `json:"object_kind"`
+	CreatedAt   customTime `json:"created_at"`
+	UpdatedAt   customTime `json:"updated_at"`
+	EventName   string     `json:"event_name"`
+	Name        string     `json:"name"`
+	Email       string     `json:"email"`
+	UserID      int64      `json:"user_id"`
+	Username    string     `json:"username"`
+	OldUsername string     `json:"old_username"`
+}
+
+// KeyAddedPayload contains key added payload of system hook
+type KeyAddedSystemEventPayload struct {
+	ObjectKind string     `json:"object_kind"`
+	CreatedAt  customTime `json:"created_at"`
+	UpdatedAt  customTime `json:"updated_at"`
+	EventName  string     `json:"event_name"`
+	Username   string     `json:"username"`
+	Key        string     `json:"key"`
+	ID         int64      `json:"id"`
+}
+
+// KeyRemovedPayload contains key removed payload of system hook
+type KeyRemovedSystemEventPayload struct {
+	ObjectKind string     `json:"object_kind"`
+	CreatedAt  customTime `json:"created_at"`
+	UpdatedAt  customTime `json:"updated_at"`
+	EventName  string     `json:"event_name"`
+	Username   string     `json:"username"`
+	Key        string     `json:"key"`
+	ID         int64      `json:"id"`
+}
+
+// GroupCreatedPayload contains group created payload of system hook
+type GroupCreatedSystemEventPayload struct {
+	ObjectKind string     `json:"object_kind"`
+	CreatedAt  customTime `json:"created_at"`
+	UpdatedAt  customTime `json:"updated_at"`
+	EventName  string     `json:"event_name"`
+	Name       string     `json:"name"`
+	Path       string     `json:"path"`
+	GroupID    int64      `json:"group_id"`
+}
+
+// GroupRemovedPayload contains group removed payload of system hook
+type GroupRemovedSystemEventPayload struct {
+	ObjectKind string     `json:"object_kind"`
+	CreatedAt  customTime `json:"created_at"`
+	UpdatedAt  customTime `json:"updated_at"`
+	EventName  string     `json:"event_name"`
+	Name       string     `json:"name"`
+	Path       string     `json:"path"`
+	GroupID    int64      `json:"group_id"`
+}
+
+// GroupRenamedPayload contains group renamed payload of system hook
+type GroupRenamedSystemEventPayload struct {
+	ObjectKind  string     `json:"object_kind"`
+	CreatedAt   customTime `json:"created_at"`
+	UpdatedAt   customTime `json:"updated_at"`
+	EventName   string     `json:"event_name"`
+	Name        string     `json:"name"`
+	Path        string     `json:"path"`
+	GroupID     int64      `json:"group_id"`
+	FullPath    string     `json:"full_path"`
+	OldPath     string     `json:"old_path"`
+	OldFullPath string     `json:"old_full_path"`
+}
+
+// NewGroupMemberPayload contains new group member payload of system hook
+type NewGroupMemberSystemEventPayload struct {
+	ObjectKind   string     `json:"object_kind"`
+	CreatedAt    customTime `json:"created_at"`
+	UpdatedAt    customTime `json:"updated_at"`
+	EventName    string     `json:"event_name"`
+	GroupAccess  string     `json:"group_access"`
+	GroupID      int64      `json:"group_id"`
+	GroupName    string     `json:"group_name"`
+	GroupPath    string     `json:"group_path"`
+	UserEmail    string     `json:"user_email"`
+	UserName     string     `json:"user_name"`
+	UserUsername string     `json:"user_username"`
+	UserID       int64      `json:"user_id"`
+}
+
+// GroupMemberRemovedPayload contains group member removed payload of system hook
+type GroupMemberRemovedSystemEventPayload struct {
+	ObjectKind   string     `json:"object_kind"`
+	CreatedAt    customTime `json:"created_at"`
+	UpdatedAt    customTime `json:"updated_at"`
+	EventName    string     `json:"event_name"`
+	GroupAccess  string     `json:"group_access"`
+	GroupID      int64      `json:"group_id"`
+	GroupName    string     `json:"group_name"`
+	GroupPath    string     `json:"group_path"`
+	UserEmail    string     `json:"user_email"`
+	UserName     string     `json:"user_name"`
+	UserUsername string     `json:"user_username"`
+	UserID       int64      `json:"user_id"`
+}
+
+// GroupMemberUpdatedPayload contains group member updated payload of system hook
+type GroupMemberUpdatedSystemEventPayload struct {
+	ObjectKind   string     `json:"object_kind"`
+	CreatedAt    customTime `json:"created_at"`
+	UpdatedAt    customTime `json:"updated_at"`
+	EventName    string     `json:"event_name"`
+	GroupAccess  string     `json:"group_access"`
+	GroupID      int64      `json:"group_id"`
+	GroupName    string     `json:"group_name"`
+	GroupPath    string     `json:"group_path"`
+	UserEmail    string     `json:"user_email"`
+	UserName     string     `json:"user_name"`
+	UserUsername string     `json:"user_username"`
+	UserID       int64      `json:"user_id"`
+}

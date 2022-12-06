@@ -18,6 +18,7 @@ var (
 	ErrEventNotFound                 = errors.New("event not defined to be parsed")
 	ErrParsingPayload                = errors.New("error parsing payload")
 	ErrParsingSystemPayload          = errors.New("error parsing system payload")
+	ErrUnknownSystemEvent            = errors.New("unknown system event")
 	// ErrHMACVerificationFailed    = errors.New("HMAC verification failed")
 )
 
@@ -39,6 +40,27 @@ const (
 	objectTag          string = "tag_push"
 	objectMergeRequest string = "merge_request"
 	objectBuild        string = "build"
+
+	sysEvtProjectCreate   string = "project_create"
+	sysEvtProjectDestroy  string = "project_destroy"
+	sysEvtProjectRename   string = "project_rename"
+	sysEvtProjectTransfer string = "project_transfer"
+	sysEvtProjectUpdate   string = "project_update"
+	sysEvtAddToTeam       string = "user_add_to_team"
+	sysEvtRemoveFromTeam  string = "user_remove_from_team"
+	sysEvtTeamUpdate      string = "user_update_for_team"
+	sysEvtUserCreate      string = "user_create"
+	sysEvtUserDestroy     string = "user_destroy"
+	sysEvtUserFailedLogin string = "user_failed_login"
+	sysEvtUserRename      string = "user_rename"
+	sysEvtKeyCreate       string = "key_create"
+	sysEvtKeyDestroy      string = "key_destroy"
+	sysEvtGroupCreate     string = "group_create"
+	sysEvtGroupDestroy    string = "group_destroy"
+	sysEvtGroupRename     string = "group_rename"
+	sysEvtAddToGroup      string = "user_add_to_group"
+	sysEvtRemoveFromGroup string = "user_remove_from_group"
+	sysEvtGroupUpdate     string = "user_update_for_group"
 )
 
 // Option is a configuration option for the webhook
@@ -112,6 +134,64 @@ func (hook Webhook) Parse(r *http.Request, events ...Event) (interface{}, error)
 	}
 
 	return eventParsing(gitLabEvent, events, payload)
+}
+
+func sysEvtParsing(eventName string, payload []byte) (interface{}, error) {
+	var sysEvt interface{}
+	switch eventName {
+	case sysEvtProjectCreate:
+		sysEvt = &ProjectCreateSystemEventPayload{}
+	case sysEvtProjectDestroy:
+		sysEvt = &ProjectDestroySystemEventPayload{}
+	case sysEvtProjectRename:
+		sysEvt = &ProjectRenameSystemEventPayload{}
+	case sysEvtProjectTransfer:
+		sysEvt = &ProjectTransferSystemEventPayload{}
+	case sysEvtProjectUpdate:
+		sysEvt = &ProjectUpdateSystemEventPayload{}
+	case sysEvtAddToTeam:
+		sysEvt = &NewTeamMemberSystemEventPayload{}
+	case sysEvtRemoveFromTeam:
+		sysEvt = &TeamMemberRemovedSystemEventPayload{}
+	case sysEvtTeamUpdate:
+		sysEvt = &TeamMemberUpdatedSystemEventPayload{}
+	case sysEvtUserCreate:
+		sysEvt = &UserCreatedSystemEventPayload{}
+	case sysEvtUserDestroy:
+		sysEvt = &UserRemovedSystemEventPayload{}
+	case sysEvtUserFailedLogin:
+		sysEvt = &UserFailedLoginSystemEventPayload{}
+	case sysEvtUserRename:
+		sysEvt = &UserRenamedSystemEventPayload{}
+	case sysEvtKeyCreate:
+		sysEvt = &KeyAddedSystemEventPayload{}
+	case sysEvtKeyDestroy:
+		sysEvt = &KeyRemovedSystemEventPayload{}
+	case sysEvtGroupCreate:
+		sysEvt = &GroupCreatedSystemEventPayload{}
+	case sysEvtGroupDestroy:
+		sysEvt = &GroupRemovedSystemEventPayload{}
+	case sysEvtGroupRename:
+		sysEvt = &GroupRenamedSystemEventPayload{}
+	case sysEvtAddToGroup:
+		sysEvt = &NewGroupMemberSystemEventPayload{}
+	case sysEvtRemoveFromGroup:
+		sysEvt = &GroupMemberRemovedSystemEventPayload{}
+	case sysEvtGroupUpdate:
+		sysEvt = &GroupMemberUpdatedSystemEventPayload{}
+	default:
+		return nil, fmt.Errorf("unknown system hook event %s", eventName)
+	}
+
+	if sysEvt == nil {
+		return nil, ErrUnknownSystemEvent
+	}
+
+	if err := json.Unmarshal(payload, sysEvt); err != nil {
+		return nil, ErrParsingSystemPayload
+	}
+
+	return nil, ErrEventNotFound
 }
 
 func eventParsing(gitLabEvent Event, events []Event, payload []byte) (interface{}, error) {
@@ -206,7 +286,7 @@ func eventParsing(gitLabEvent Event, events []Event, payload []byte) (interface{
 			case objectMergeRequest:
 				return eventParsing(MergeRequestEvents, events, payload)
 			default:
-				return nil, fmt.Errorf("unknown system hook event %s", gitLabEvent)
+				return sysEvtParsing(pl.EventName, payload)
 			}
 		}
 	default:

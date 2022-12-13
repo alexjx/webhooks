@@ -1,0 +1,9 @@
+{
+  "created_at": "2022-12-13T14:36:08Z",
+  "updated_at": "2022-12-13T14:36:08Z",
+  "event_name": "user_create",
+  "name": "test",
+  "email": "[REDACTED]",
+  "user_id": 177,
+  "username": "test"
+}

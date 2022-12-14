@@ -137,62 +137,62 @@ func (hook Webhook) Parse(r *http.Request, events ...Event) (interface{}, error)
 }
 
 func sysEvtParsing(eventName string, payload []byte) (interface{}, error) {
-	var SysEvt interface{}
+	var sysEvt interface{}
 	switch eventName {
 	case SysEvtProjectCreate:
-		SysEvt = &ProjectCreateSystemEventPayload{}
+		sysEvt = &ProjectCreateSystemEventPayload{}
 	case SysEvtProjectDestroy:
-		SysEvt = &ProjectDestroySystemEventPayload{}
+		sysEvt = &ProjectDestroySystemEventPayload{}
 	case SysEvtProjectRename:
-		SysEvt = &ProjectRenameSystemEventPayload{}
+		sysEvt = &ProjectRenameSystemEventPayload{}
 	case SysEvtProjectTransfer:
-		SysEvt = &ProjectTransferSystemEventPayload{}
+		sysEvt = &ProjectTransferSystemEventPayload{}
 	case SysEvtProjectUpdate:
-		SysEvt = &ProjectUpdateSystemEventPayload{}
+		sysEvt = &ProjectUpdateSystemEventPayload{}
 	case SysEvtAddToTeam:
-		SysEvt = &NewTeamMemberSystemEventPayload{}
+		sysEvt = &NewTeamMemberSystemEventPayload{}
 	case SysEvtRemoveFromTeam:
-		SysEvt = &TeamMemberRemovedSystemEventPayload{}
+		sysEvt = &TeamMemberRemovedSystemEventPayload{}
 	case SysEvtTeamUpdate:
-		SysEvt = &TeamMemberUpdatedSystemEventPayload{}
+		sysEvt = &TeamMemberUpdatedSystemEventPayload{}
 	case SysEvtUserCreate:
-		SysEvt = &UserCreatedSystemEventPayload{}
+		sysEvt = &UserCreatedSystemEventPayload{}
 	case SysEvtUserDestroy:
-		SysEvt = &UserRemovedSystemEventPayload{}
+		sysEvt = &UserRemovedSystemEventPayload{}
 	case SysEvtUserFailedLogin:
-		SysEvt = &UserFailedLoginSystemEventPayload{}
+		sysEvt = &UserFailedLoginSystemEventPayload{}
 	case SysEvtUserRename:
-		SysEvt = &UserRenamedSystemEventPayload{}
+		sysEvt = &UserRenamedSystemEventPayload{}
 	case SysEvtKeyCreate:
-		SysEvt = &KeyAddedSystemEventPayload{}
+		sysEvt = &KeyAddedSystemEventPayload{}
 	case SysEvtKeyDestroy:
-		SysEvt = &KeyRemovedSystemEventPayload{}
+		sysEvt = &KeyRemovedSystemEventPayload{}
 	case SysEvtGroupCreate:
-		SysEvt = &GroupCreatedSystemEventPayload{}
+		sysEvt = &GroupCreatedSystemEventPayload{}
 	case SysEvtGroupDestroy:
-		SysEvt = &GroupRemovedSystemEventPayload{}
+		sysEvt = &GroupRemovedSystemEventPayload{}
 	case SysEvtGroupRename:
-		SysEvt = &GroupRenamedSystemEventPayload{}
+		sysEvt = &GroupRenamedSystemEventPayload{}
 	case SysEvtAddToGroup:
-		SysEvt = &NewGroupMemberSystemEventPayload{}
+		sysEvt = &NewGroupMemberSystemEventPayload{}
 	case SysEvtRemoveFromGroup:
-		SysEvt = &GroupMemberRemovedSystemEventPayload{}
+		sysEvt = &GroupMemberRemovedSystemEventPayload{}
 	case SysEvtGroupUpdate:
-		SysEvt = &GroupMemberUpdatedSystemEventPayload{}
+		sysEvt = &GroupMemberUpdatedSystemEventPayload{}
 	default:
 		return nil, fmt.Errorf("unknown system hook event %s", eventName)
 	}
 
-	if SysEvt == nil {
+	if sysEvt == nil {
 		return nil, ErrUnknownSystemEvent
 	}
 
-	if err := json.Unmarshal(payload, SysEvt); err != nil {
+	if err := json.Unmarshal(payload, sysEvt); err != nil {
 		return nil, ErrParsingSystemPayload
 	}
 
 	// convention: need to return content instead of pointer
-	return *SysEvt, nil
+	return *sysEvt, nil
 }
 
 func eventParsing(gitLabEvent Event, events []Event, payload []byte) (interface{}, error) {

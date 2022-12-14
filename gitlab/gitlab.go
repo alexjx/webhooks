@@ -136,7 +136,7 @@ func (hook Webhook) Parse(r *http.Request, events ...Event) (interface{}, error)
 	return eventParsing(gitLabEvent, events, payload)
 }
 
-func SysEvtParsing(eventName string, payload []byte) (interface{}, error) {
+func sysEvtParsing(eventName string, payload []byte) (interface{}, error) {
 	var SysEvt interface{}
 	switch eventName {
 	case SysEvtProjectCreate:
@@ -191,7 +191,8 @@ func SysEvtParsing(eventName string, payload []byte) (interface{}, error) {
 		return nil, ErrParsingSystemPayload
 	}
 
-	return SysEvt, nil
+	// convention: need to return content instead of pointer
+	return *SysEvt, nil
 }
 
 func eventParsing(gitLabEvent Event, events []Event, payload []byte) (interface{}, error) {
@@ -286,7 +287,7 @@ func eventParsing(gitLabEvent Event, events []Event, payload []byte) (interface{
 			case objectMergeRequest:
 				return eventParsing(MergeRequestEvents, events, payload)
 			default:
-				return SysEvtParsing(pl.EventName, payload)
+				return sysEvtParsing(pl.EventName, payload)
 			}
 		}
 	default:

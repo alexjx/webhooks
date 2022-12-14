@@ -258,8 +258,6 @@ func sysEvtParsing(eventName string, payload []byte) (interface{}, error) {
 			return nil, ErrParsingSystemPayload
 		}
 		return sysEvt, nil
-	default:
-		return nil, fmt.Errorf("unknown system hook event %s", eventName)
 	}
 
 	return nil, ErrUnknownSystemEvent

@@ -357,7 +357,7 @@ func eventParsing(gitLabEvent Event, events []Event, payload []byte) (interface{
 			case objectMergeRequest:
 				return eventParsing(MergeRequestEvents, events, payload)
 			default:
-				return sysEvt, nilParsing(pl.EventName, payload)
+				return sysEvtParsing(pl.EventName, payload)
 			}
 		}
 	default:

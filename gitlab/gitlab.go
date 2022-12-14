@@ -137,62 +137,132 @@ func (hook Webhook) Parse(r *http.Request, events ...Event) (interface{}, error)
 }
 
 func sysEvtParsing(eventName string, payload []byte) (interface{}, error) {
-	var sysEvt interface{}
 	switch eventName {
 	case SysEvtProjectCreate:
-		sysEvt = &ProjectCreateSystemEventPayload{}
+		sysEvt := ProjectCreateSystemEventPayload{}
+		if err := json.Unmarshal(payload, &sysEvt); err != nil {
+			return nil, ErrParsingSystemPayload
+		}
+		return sysEvt, nil
 	case SysEvtProjectDestroy:
-		sysEvt = &ProjectDestroySystemEventPayload{}
+		sysEvt := ProjectDestroySystemEventPayload{}
+		if err := json.Unmarshal(payload, &sysEvt); err != nil {
+			return nil, ErrParsingSystemPayload
+		}
+		return sysEvt, nil
 	case SysEvtProjectRename:
-		sysEvt = &ProjectRenameSystemEventPayload{}
+		sysEvt := ProjectRenameSystemEventPayload{}
+		if err := json.Unmarshal(payload, &sysEvt); err != nil {
+			return nil, ErrParsingSystemPayload
+		}
+		return sysEvt, nil
 	case SysEvtProjectTransfer:
-		sysEvt = &ProjectTransferSystemEventPayload{}
+		sysEvt := ProjectTransferSystemEventPayload{}
+		if err := json.Unmarshal(payload, &sysEvt); err != nil {
+			return nil, ErrParsingSystemPayload
+		}
+		return sysEvt, nil
 	case SysEvtProjectUpdate:
-		sysEvt = &ProjectUpdateSystemEventPayload{}
+		sysEvt := ProjectUpdateSystemEventPayload{}
+		if err := json.Unmarshal(payload, &sysEvt); err != nil {
+			return nil, ErrParsingSystemPayload
+		}
+		return sysEvt, nil
 	case SysEvtAddToTeam:
-		sysEvt = &NewTeamMemberSystemEventPayload{}
+		sysEvt := NewTeamMemberSystemEventPayload{}
+		if err := json.Unmarshal(payload, &sysEvt); err != nil {
+			return nil, ErrParsingSystemPayload
+		}
+		return sysEvt, nil
 	case SysEvtRemoveFromTeam:
-		sysEvt = &TeamMemberRemovedSystemEventPayload{}
+		sysEvt := TeamMemberRemovedSystemEventPayload{}
+		if err := json.Unmarshal(payload, &sysEvt); err != nil {
+			return nil, ErrParsingSystemPayload
+		}
+		return sysEvt, nil
 	case SysEvtTeamUpdate:
-		sysEvt = &TeamMemberUpdatedSystemEventPayload{}
+		sysEvt := TeamMemberUpdatedSystemEventPayload{}
+		if err := json.Unmarshal(payload, &sysEvt); err != nil {
+			return nil, ErrParsingSystemPayload
+		}
+		return sysEvt, nil
 	case SysEvtUserCreate:
-		sysEvt = &UserCreatedSystemEventPayload{}
+		sysEvt := UserCreatedSystemEventPayload{}
+		if err := json.Unmarshal(payload, &sysEvt); err != nil {
+			return nil, ErrParsingSystemPayload
+		}
+		return sysEvt, nil
 	case SysEvtUserDestroy:
-		sysEvt = &UserRemovedSystemEventPayload{}
+		sysEvt := UserRemovedSystemEventPayload{}
+		if err := json.Unmarshal(payload, &sysEvt); err != nil {
+			return nil, ErrParsingSystemPayload
+		}
+		return sysEvt, nil
 	case SysEvtUserFailedLogin:
-		sysEvt = &UserFailedLoginSystemEventPayload{}
+		sysEvt := UserFailedLoginSystemEventPayload{}
+		if err := json.Unmarshal(payload, &sysEvt); err != nil {
+			return nil, ErrParsingSystemPayload
+		}
+		return sysEvt, nil
 	case SysEvtUserRename:
-		sysEvt = &UserRenamedSystemEventPayload{}
+		sysEvt := UserRenamedSystemEventPayload{}
+		if err := json.Unmarshal(payload, &sysEvt); err != nil {
+			return nil, ErrParsingSystemPayload
+		}
+		return sysEvt, nil
 	case SysEvtKeyCreate:
-		sysEvt = &KeyAddedSystemEventPayload{}
+		sysEvt := KeyAddedSystemEventPayload{}
+		if err := json.Unmarshal(payload, &sysEvt); err != nil {
+			return nil, ErrParsingSystemPayload
+		}
+		return sysEvt, nil
 	case SysEvtKeyDestroy:
-		sysEvt = &KeyRemovedSystemEventPayload{}
+		sysEvt := KeyRemovedSystemEventPayload{}
+		if err := json.Unmarshal(payload, &sysEvt); err != nil {
+			return nil, ErrParsingSystemPayload
+		}
+		return sysEvt, nil
 	case SysEvtGroupCreate:
-		sysEvt = &GroupCreatedSystemEventPayload{}
+		sysEvt := GroupCreatedSystemEventPayload{}
+		if err := json.Unmarshal(payload, &sysEvt); err != nil {
+			return nil, ErrParsingSystemPayload
+		}
+		return sysEvt, nil
 	case SysEvtGroupDestroy:
-		sysEvt = &GroupRemovedSystemEventPayload{}
+		sysEvt := GroupRemovedSystemEventPayload{}
+		if err := json.Unmarshal(payload, &sysEvt); err != nil {
+			return nil, ErrParsingSystemPayload
+		}
+		return sysEvt, nil
 	case SysEvtGroupRename:
-		sysEvt = &GroupRenamedSystemEventPayload{}
+		sysEvt := GroupRenamedSystemEventPayload{}
+		if err := json.Unmarshal(payload, &sysEvt); err != nil {
+			return nil, ErrParsingSystemPayload
+		}
+		return sysEvt, nil
 	case SysEvtAddToGroup:
-		sysEvt = &NewGroupMemberSystemEventPayload{}
+		sysEvt := NewGroupMemberSystemEventPayload{}
+		if err := json.Unmarshal(payload, &sysEvt); err != nil {
+			return nil, ErrParsingSystemPayload
+		}
+		return sysEvt, nil
 	case SysEvtRemoveFromGroup:
-		sysEvt = &GroupMemberRemovedSystemEventPayload{}
+		sysEvt := GroupMemberRemovedSystemEventPayload{}
+		if err := json.Unmarshal(payload, &sysEvt); err != nil {
+			return nil, ErrParsingSystemPayload
+		}
+		return sysEvt, nil
 	case SysEvtGroupUpdate:
-		sysEvt = &GroupMemberUpdatedSystemEventPayload{}
+		sysEvt := GroupMemberUpdatedSystemEventPayload{}
+		if err := json.Unmarshal(payload, &sysEvt); err != nil {
+			return nil, ErrParsingSystemPayload
+		}
+		return sysEvt, nil
 	default:
 		return nil, fmt.Errorf("unknown system hook event %s", eventName)
 	}
 
-	if sysEvt == nil {
-		return nil, ErrUnknownSystemEvent
-	}
-
-	if err := json.Unmarshal(payload, sysEvt); err != nil {
-		return nil, ErrParsingSystemPayload
-	}
-
-	// convention: need to return content instead of pointer
-	return *sysEvt, nil
+	return nil, ErrUnknownSystemEvent
 }
 
 func eventParsing(gitLabEvent Event, events []Event, payload []byte) (interface{}, error) {
@@ -287,7 +357,7 @@ func eventParsing(gitLabEvent Event, events []Event, payload []byte) (interface{
 			case objectMergeRequest:
 				return eventParsing(MergeRequestEvents, events, payload)
 			default:
-				return sysEvtParsing(pl.EventName, payload)
+				return sysEvt, nilParsing(pl.EventName, payload)
 			}
 		}
 	default:

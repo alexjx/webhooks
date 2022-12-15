@@ -37,6 +37,7 @@ type IssueEventPayload struct {
 	Project          Project          `json:"project"`
 	Repository       Repository       `json:"repository"`
 	ObjectAttributes ObjectAttributes `json:"object_attributes"`
+	Labels           []Label          `json:"labels"`
 	Assignee         Assignee         `json:"assignee"`
 	Changes          Changes          `json:"changes"`
 }

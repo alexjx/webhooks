@@ -11,6 +11,7 @@ type customTime struct {
 
 func (t *customTime) UnmarshalJSON(b []byte) (err error) {
 	layout := []string{
+		"2006-01-02",
 		"2006-01-02 15:04:05 MST",
 		"2006-01-02 15:04:05 Z07:00",
 		"2006-01-02 15:04:05 Z0700",
